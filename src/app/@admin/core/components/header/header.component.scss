@@ -1,0 +1,12 @@
+@import "./../../../pages/admin.component.scss";
+
+#menu-toggle {
+  background-color: transparent;
+  color: $admin-primary-color;
+  border-color: transparent;
+  font-size: larger;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.09) !important;
+}

@@ -1,0 +1,11 @@
+@import './../../../pages/admin.component.scss';
+
+#sidebar-wrapper{
+    margin-left: 0px;
+    background-color: $admin-primary-color;
+}
+
+.sidebar-heading a {
+    color: whitesmoke;
+    text-decoration: none;
+}
