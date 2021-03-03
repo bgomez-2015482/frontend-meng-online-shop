@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
+import { IMeData } from '@core/interfaces/session.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  session: IMeData = {
+    status: false
+  };
+  access = false;
+  role: string;
+  userLabel = '';
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+    this.authService.accesVar$.subscribe((result) => {
+      console.log(result.status);
+      this.session = result;
+      this.access = this.session.status;
+      this.role = this.session.user?.role;
+      this.userLabel = `${ this.session.user?.name } ${ this.session.user?.lastName }`;
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  logOut() {
+    this.authService.resetSession();
   }
 
 }

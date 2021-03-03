@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form (ngSubmit)="add()" #forma="ngForm">
+        <h1>Registro de usuario</h1>
+        <p>
+          Rellena los datos del formulario para efectuar el registro de tu
+          cuenta de usuario.
+        </p>
+        <hr />
+        <label for="name"><b>Nombre</b></label>
+        <input
+          type="text"
+          placeholder="Enter name"
+          name="name"
+          #name="ngModel"
+          [(ngModel)]="register.name"
+          class="form-control"
+          [ngClass]="{'is-valid': name.valid, 'is-invalid': name.invalid}"
+          required
+        />
+
+        <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div *ngIf="name.errors.required">Introduzca un nombre.</div>
+        </div>
+
+        <label for="lastName"><b>Apellido / s</b></label>
+        <input
+          type="text"
+          placeholder="Enter surname/ s"
+          name="lastName"
+          required
+          #lastName="ngModel"
+          [(ngModel)]="register.lastName"
+          class="form-control"
+          [ngClass]="{'is-valid': lastName.valid, 'is-invalid': lastName.invalid}"
+          required
+        />
+
+        <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+          <div *ngIf="lastName.errors.required">Introduzca un apellido o  apellidos.</div>
+        </div>
+
+        <label for="email"><b>Fecha de nacimiento</b></label>
+        <app-datepicker-legal-age
+          (newDate)="dataAsign($event)"
+        ></app-datepicker-legal-age>
+
+        <label for="email"><b>Correo electronico</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          name="email"
+          #email="ngModel"
+          [(ngModel)]="register.email"
+          class="form-control"
+          [ngClass]="{'is-valid': email.valid, 'is-invalid': email.invalid}"
+          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+          required
+        />
+
+        <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div *ngIf="email.errors.required">Introduzca un correo electrónico valido por favor.</div>
+          <div *ngIf="email.errors && email.errors.pattern">El correo electrónico no sigue el formato correcto. example@user.com</div>
+        </div>
+
+        <label for="password"><b>Contraseña</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          #password="ngModel"
+          [(ngModel)]="register.password"
+          class="form-control"
+          [ngClass]="{'is-valid': password.valid, 'is-invalid': password.invalid}"
+          required
+        />
+
+        <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div *ngIf="password.errors.required">Introduzca una contraseña valida.</div>
+        </div>
+
+        <p>
+          By creating an account you agree to our
+          <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
+        </p>
+        <p>
+          ¿Ya tiene una cuenta?
+          <a [routerLink]="['/login']" style="color: dodgerblue"
+            >Iniciar sesión</a
+          >.
+        </p>
+        <div class="row">
+          <div class="col-lg">
+            <button [disabled]="forma.invalid" type="submit" class="signup-btn">Registrarse</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg"></div>
+  </div>
+</div>
