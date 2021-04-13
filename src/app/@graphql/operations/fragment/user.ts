@@ -5,7 +5,6 @@ fragment UserObject on User {
       id
       name
       lastName
-      password @include (if: $include)
       email
       registerDate @include (if: $include)
       birthday @include (if: $include)
